@@ -1,0 +1,6 @@
+1;Ponto A
+2;Ponto B
+3;Ponto C
+4;Ponto D
+5;Ponto E
+6;Ponto F

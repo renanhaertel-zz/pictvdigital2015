@@ -1,0 +1,64 @@
+nomeArquivo = "pontos.txt"
+arquivo = assert(io.open(nomeArquivo, "r"), "Arquivo não pode ser criado") --assert é uma função que apresenta erro se ocorrer problemas
+arquivo:seek("set") --busca o início do arquivo
+nomeArquivo = "linhas.txt"
+arquivo = assert(io.open(nomeArquivo, "r"), "Arquivo não pode ser criado") --assert é uma função que apresenta erro se ocorrer problemas
+arquivo:seek("set") --busca o início do arquivo
+nomeArquivo = "rotas.txt"
+arquivo = assert(io.open(nomeArquivo, "r"), "Arquivo não pode ser criado") --assert é uma função que apresenta erro se ocorrer problemas
+arquivo:seek("set") --busca o início do arquivo
+linhas = {}
+
+ponto = {
+  nome = {}, id = {}
+}
+
+linha = {
+	nome = {}, id = {}
+}
+
+rota = {
+	id = {}, idl = {}, idp = {}
+}
+
+line = 0
+i = 1
+counter = 1
+count = 0
+---------------------------------------------------------------------------------------------------------------------
+
+--Processamento das informações encontradas no arquivo
+for line in io.lines("pontos.txt") do
+  linhas[counter] = arquivo:read('*line')
+  pos = string.find(linhas[counter], ';')
+  ponto.id[counter] = string.sub(linhas[counter],i, pos-1)
+  ponto.nome[counter] = string.sub(linhas[counter],pos+1, -1)
+  counter = counter  + 1
+end
+
+for line in io.lines("linhas.txt") do
+  linhas[counter] = arquivo:read('*line')
+  pos = string.find(linhas[counter], ';')
+  linha.id[counter] = string.sub(linhas[counter],i, pos-1)
+  linha.nome[counter] = string.sub(linhas[counter],pos+1, -1)
+  counter = counter  + 1
+end
+
+for line in io.lines("rotas.txt") do
+  linhas[counter] = arquivo:read('*line')
+  pos = string.find(linhas[counter], ';')
+  rota.id[counter] = string.sub(linhas[counter],i, pos-1)
+  rota.idl[counter] = string.sub(linhas[counter],pos+1, pos+2)
+  rota.idp[counter] = string.sub(linhas[counter], pos+3, -1)
+  counter = counter  + 1
+end
+
+for varNome=1, #rota.id do
+    for i=1, #linha.id do
+	  if rota.idl[varnome] = linha.id[varnome] then lnome = linha.nome[varnome]
+	end
+    for j=1, #ponto.id do
+      if rota.idp[varnome] = ponto.id[varnome] then pnome = ponto.nome[varnome]
+    end
+	io.write(lnome .. ' ' .. pnome)
+end
